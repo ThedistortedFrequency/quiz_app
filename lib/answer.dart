@@ -7,12 +7,16 @@ class Answer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: answerhandler,
-        child: Text(answerText),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Container(
+        margin: const EdgeInsets.all(7),
+        height: 40,
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: answerhandler,
+          child: Text(answerText),
+        ),
       ),
     );
   }

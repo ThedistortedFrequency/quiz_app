@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizapp/answer.dart';
-import 'package:quizapp/question.dart';
+import 'package:quizapp/quiz.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var question = [
+    var questions = [
       {
         'questionText': 'What is the capital of France?',
         'options': ['Paris', 'London', 'Berlin', 'Rome'],
@@ -167,22 +166,21 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: Center(
-          child: _questionIndex < question.length
-              ? Column(
+          child: _questionIndex < questions.length
+              ? Quiz(
+                  question: questions,
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex)
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Question(
-                      question[_questionIndex]['questionText'].toString(),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: resetQuiz,
+                        child: const Text("Reset"),
+                      ),
                     ),
-                    ...(question[_questionIndex]['options'] as List)
-                        .map((ans) => Answer(_answerQuestion, ans))
-                        .toList()
                   ],
-                )
-              : Center(
-                  child: ElevatedButton(
-                    onPressed: resetQuiz,
-                    child: const Text("Reset"),
-                  ),
                 ),
         ),
       ),
